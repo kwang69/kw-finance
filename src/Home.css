@@ -1,0 +1,14 @@
+@import '~antd/dist/antd.css';
+.Menu{
+  display: flex;
+  flex-direction: column;
+  background-color: #538dff;
+  min-height: 90vh;
+}
+
+.Menu_1{
+  padding: 100px 0px 0px 100px;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+}
