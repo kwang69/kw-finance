@@ -6,38 +6,28 @@ import { BrowserRouter, Route, Link } from 'react-router-dom'
 
 const columns = [
   {
-    title: 'Name',
-    dataIndex: 'name',
-    key: 'name',
+    title: 'Company Name',
+    dataIndex: 'comp_name',
+    key: 'comp_name',
   },
   {
-    title: 'Age',
-    dataIndex: 'age',
-    key: 'age',
+    title: 'Part',
+    dataIndex: 'part',
+    key: 'part',
+  },
+  {
+    title: 'Price($)/Unit',
+    dataIndex: 'ppu',
+    key: 'ppu',
   },
   {
     title: 'Address',
     dataIndex: 'address',
     key: 'address',
-  },
-  {
-    title: 'SNN',
-    dataIndex: 'snn',
-    key: 'snn',
-  },
-  {
-    title: 'No of Withholdings',
-    dataIndex: 'now',
-    key: 'now',
-  },
-  {
-    title: 'Salary($)',
-    dataIndex: 'salary',
-    key: 'salary',
-  },
+  }
 ];
 
-class ViewEmployee extends Component {
+class ViewVendor extends Component {
   constructor(props) {
     super(props);
 
@@ -47,7 +37,7 @@ class ViewEmployee extends Component {
   }
 
   componentDidMount() {
-    fetch('http://localhost:4000/ViewEmployee')
+    fetch('http://localhost:4000/ViewVendor')
       .then(response => response.json())
       .then(data => this.setState({ data }));
   }
@@ -56,10 +46,10 @@ class ViewEmployee extends Component {
     const { data } = this.state.data;
     return (
       <div className='Title-text'>
-        View Employees
+        View Vendors
          <Table columns={columns} dataSource={data} />
       </div>
     );
   }
 }
-export default ViewEmployee;
+export default ViewVendor;

@@ -2,7 +2,7 @@
 .Menu{
   display: flex;
   flex-direction: column;
-  background-color: #538dff;
+  background-color: #e0de637e;
   min-height: 90vh;
 }
 

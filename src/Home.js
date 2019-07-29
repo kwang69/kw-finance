@@ -9,23 +9,34 @@ class Home extends Component {
         <div className='Menu'>
           <div className='Menu_1'>
             <Link to="/ViewEmployee">
-              <Button type="primary">View Employee</Button>
+              <Button type="primary">View Employees</Button>
             </Link>
-            <Link to="/AddEmployee">
+            <Link to="/ViewCustomer">
               <Button type="primary">View Customers</Button>
             </Link>
-            <Link to="/AddEmployee">
-              <Button type="primary">VIew Vendors</Button>
+            <Link to="/ViewVendor">
+              <Button type="primary">View Vendors</Button>
             </Link>
           </div>
           <div className='Menu_1'>
             <Link to="/AddEmployee">
               <Button type="primary">Add Employee</Button>
             </Link>
+            <Link to="/AddCustomer">
+              <Button type="primary">Add Customer</Button>
+            </Link>
+            <Link to="/AddVendor">
+              <Button type="primary">Add Vendor</Button>
+            </Link>
+          </div>
+          <div className='Menu_1'>
             <Link to="/AddEmployee">
+              <Button type="primary">Pay an Employee</Button>
+            </Link>
+            <Link to="/AddCustomer">
               <Button type="primary">Add Customers</Button>
             </Link>
-            <Link to="/AddEmployee">
+            <Link to="/AddVendor">
               <Button type="primary">Add Vendors</Button>
             </Link>
           </div>
