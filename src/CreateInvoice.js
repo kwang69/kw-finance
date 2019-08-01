@@ -67,12 +67,30 @@ class CreateInvoice extends Component {
     fetch(`http://localhost:4000/AddHistory?date=${date}&comp_name=${pay_data.comp_name}&quantity=${pay_data.quantity}&ppu=${price}&total=${pay_data.quantity*price}`)
       // .catch(err => console.error(err))
   }
+  updateBS = _ => {
+    const {pay_data}  = this.state;
+    const {data} = this.state.data;
+    let price = 0;
+    let j = 0;
+    for(j = 0; j < data.length; j++) {
+      if (data[j].comp_name == pay_data.comp_name) {
+        price = data[j].price;
+      }
+    } 
+
+    fetch(`http://localhost:4000/updateBS_1?ac=${pay_data.quantity*price}`)
+    fetch(`http://localhost:4000/updateBS_3?total=${pay_data.quantity*6}`)
+    fetch(`http://localhost:4000/updateIS_1?sale=${pay_data.quantity*price}`)
+    fetch(`http://localhost:4000/updateIS_2?cost=${pay_data.quantity*6}`)
+      // .catch(err => console.error(err))
+  }
   createInvoice = _ => {
     const { pay_data } = this.state;
     fetch(`http://localhost:4000/CreateInvoice?quantity=${pay_data.quantity}`)
       .then(data => this.setState({ data }))
       .catch(err => console.error(err))
       this.addHistory()
+      this.updateBS()
     window.location.reload()
   }
 

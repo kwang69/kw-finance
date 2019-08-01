@@ -73,12 +73,31 @@ class PayEmployee extends Component {
     fetch(`http://localhost:4000/AddPayRoll?name=${pay_data.name}&date=${date}&salary=${salary}`)
       .catch(err => console.error(err))
   }
+
+  updateBalance = _ => {
+    const { pay_data } = this.state;
+    const {data} = this.state.data;
+    let salary = 0;
+    let j = 0;
+    for(j = 0; j < data.length; j++) {
+      if (data[j].name == pay_data.name) {
+        salary = data[j].salary;
+      }
+    } 
+
+    fetch(`http://localhost:4000/updateBalance?salary=${salary}`)
+      .catch(err => console.error(err))
+    fetch(`http://localhost:4000/updateIS?salary=${salary}`)
+      .catch(err => console.error(err))
+  }
+
   payEmployee = _ => {
     const { pay_data } = this.state;
     fetch(`http://localhost:4000/PayEmployee?name=${pay_data.name}`)
       .then(data => this.setState({ data }))
       .catch(err => console.error(err))
       this.addPayRoll()
+      this.updateBalance()
     window.location.reload()
   }
 

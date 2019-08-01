@@ -9,6 +9,9 @@ const SELECT_ALL_VENDOR_QUERY = 'SELECT * FROM Vendor';
 const SELECT_ALL_PAYROLL_QUERY = 'SELECT * FROM PayRoll';
 const SELECT_ALL_INVENTORY = 'SELECT * FROM Inventory';
 const SELECT_ALL_INVOICEHISTORY = 'SELECT * FROM InvoiceHistory';
+const SELECT_ALL_POHISTORY = 'SELECT * FROM POHistory';
+const SELECT_ALL_BALANCESHEET = 'SELECT * FROM BalanceSheet';
+const SELECT_ALL_IP = 'SELECT * FROM IncomeStatement';
 app.use(cors());
 
 var pool = mysql.createPool({
@@ -52,6 +55,17 @@ app.get('/ViewVendor', (req, res) => {
         }
         else {
             return res.json({ data: results });
+        }
+    });
+});
+
+app.get('/ViewVendor_1', (req, res) => {
+    pool.query(SELECT_ALL_VENDOR_QUERY, (err, results) => {
+        if (err) {
+            return res.send(err);
+        }
+        else {
+            return res.json({ vendor: results });
         }
     });
 });
@@ -100,6 +114,39 @@ app.get('/ViewInvoiceHistory', (req, res) => {
     });
 });
 
+app.get('/ViewPOHistory', (req, res) => {
+    pool.query(SELECT_ALL_POHISTORY, (err, results) => {
+        if (err) {
+            return res.send(err);
+        }
+        else {
+            return res.json({ data: results });
+        }
+    });
+});
+
+app.get('/ViewBalanceSheet', (req, res) => {
+    pool.query(SELECT_ALL_BALANCESHEET, (err, results) => {
+        if (err) {
+            return res.send(err);
+        }
+        else {
+            return res.json({ data: results });
+        }
+    });
+});
+
+app.get('/ViewIP', (req, res) => {
+    pool.query(SELECT_ALL_IP, (err, results) => {
+        if (err) {
+            return res.send(err);
+        }
+        else {
+            return res.json({ data: results });
+        }
+    });
+});
+
 app.get('/AddEmployee', (req, res) => {
     const { name, age, address, snn, now, salary } = req.query;
     console.log(name, age, address, snn, now, salary);
@@ -117,7 +164,7 @@ app.get('/AddEmployee', (req, res) => {
 app.get('/PayEmployee', (req, res) => {
     const { name } = req.query;
     console.log(name);
-    PAY_EMPLOYEE_QUERY = `UPDATE Employee SET now = now + 1 WHERE name = '${name}' AND now > 0`
+    PAY_EMPLOYEE_QUERY = `UPDATE Employee SET now = now + 1 WHERE name = '${name}'`
     pool.query(PAY_EMPLOYEE_QUERY, (err, results) => {
         if (err) {
             return res.send(err);
@@ -142,6 +189,169 @@ app.get('/CreateInvoice', (req, res) => {
     });
 });
 
+app.get('/updateBalance', (req, res) => {
+    const { salary } = req.query;
+    console.log(salary);
+    UPDATE_BS_QUERY = `UPDATE BalanceSheet SET value = value - ${salary} WHERE name = 'Cash' OR name ='NET WORTH'`
+    pool.query(UPDATE_BS_QUERY, (err, results) => {
+        if (err) {
+            return res.send(err);
+        }
+        else {
+            return res.send('successfully update');
+        }
+    });
+});
+
+app.get('/updateIS', (req, res) => {
+    const { salary } = req.query;
+    console.log(salary);
+    UPDATE_IS_QUERY = `UPDATE IncomeStatement SET value = value + ${salary} WHERE name = 'Payroll'`
+    pool.query(UPDATE_IS_QUERY, (err, results) => {
+        if (err) {
+            return res.send(err);
+        }
+        else {
+            return res.send('successfully update');
+        }
+    });
+});
+
+
+app.get('/updateIS_1', (req, res) => {
+    const { sale } = req.query;
+    console.log(sale);
+    UPDATE_BS_QUERY = `UPDATE IncomeStatement SET value = value + ${sale} WHERE name = 'Sales'`
+    pool.query(UPDATE_BS_QUERY, (err, results) => {
+        if (err) {
+            return res.send(err);
+        }
+        else {
+            return res.send('successfully update');
+        }
+    });
+});
+app.get('/updateIS_2', (req, res) => {
+    const { cost } = req.query;
+    console.log(cost);
+    UPDATE_BS_QUERY = `UPDATE IncomeStatement SET value = value + ${cost} WHERE name = 'COGS'`
+    pool.query(UPDATE_BS_QUERY, (err, results) => {
+        if (err) {
+            return res.send(err);
+        }
+        else {
+            return res.send('successfully update');
+        }
+    });
+});
+app.get('/updateBS_1', (req, res) => {
+    const { ac } = req.query;
+    console.log(ac);
+    UPDATE_BS_QUERY = `UPDATE BalanceSheet SET value = value + ${ac} WHERE name = 'Accounts Receivable' OR name ='NET WORTH'`
+    pool.query(UPDATE_BS_QUERY, (err, results) => {
+        if (err) {
+            return res.send(err);
+        }
+        else {
+            return res.send('successfully update');
+        }
+    });
+});
+
+app.get('/updateBS_2', (req, res) => {
+    const { total } = req.query;
+    console.log(total);
+    UPDATE_BS_QUERY = `UPDATE BalanceSheet SET value = value + ${total} WHERE name = 'Inventory' OR name ='Accounts Payable'`
+    pool.query(UPDATE_BS_QUERY, (err, results) => {
+        if (err) {
+            return res.send(err);
+        }
+        else {
+            return res.send('successfully update');
+        }
+    });
+});
+
+app.get('/updateBS_3', (req, res) => {
+    const { total } = req.query;
+    console.log(total);
+    UPDATE_BS_QUERY = `UPDATE BalanceSheet SET value = value - ${total} WHERE name = 'Inventory'`
+    pool.query(UPDATE_BS_QUERY, (err, results) => {
+        if (err) {
+            return res.send(err);
+        }
+        else {
+            return res.send('successfully update');
+        }
+    });
+});
+
+app.get('/update', (req, res) => {
+    const { ar } = req.query;
+    console.log(ar);
+    UPDATE_QUERY = `UPDATE BalanceSheet SET value = value + ${ar} WHERE name = 'Cash'`
+    pool.query(UPDATE_QUERY, (err, results) => {
+        if (err) {
+            return res.send(err);
+        }
+        else {
+            return res.send('successfully update');
+        }
+    });
+});
+
+app.get('/update_1', (req, res) => {
+    const { ar } = req.query;
+    console.log(ar);
+    UPDATE_1_QUERY = `UPDATE BalanceSheet SET value = 0 WHERE name = 'Accounts Receivable'`
+    pool.query(UPDATE_1_QUERY, (err, results) => {
+        if (err) {
+            return res.send(err);
+        }
+        else {
+            return res.send('successfully update');
+        }
+    });
+});
+app.get('/update_2', (req, res) => {
+    const { ap } = req.query;
+    console.log(ap);
+    UPDATE_2_QUERY = `UPDATE BalanceSheet SET value = value - ${ap} WHERE name = 'Cash'`
+    pool.query(UPDATE_2_QUERY, (err, results) => {
+        if (err) {
+            return res.send(err);
+        }
+        else {
+            return res.send('successfully update');
+        }
+    });
+});
+app.get('/update_3', (req, res) => {
+    UPDATE_3_QUERY = `UPDATE BalanceSheet SET value = 0 WHERE name = 'Accounts Payable'`
+    pool.query(UPDATE_3_QUERY, (err, results) => {
+        if (err) {
+            return res.send(err);
+        }
+        else {
+            return res.send('successfully update');
+        }
+    });
+});
+
+app.get('/CreatePO', (req, res) => {
+    const { part, quantity, comp_name } = req.query;
+    console.log(part, quantity, comp_name);
+    CREATE_PO_QUERY = `UPDATE Inventory SET quantity = quantity + ${quantity} WHERE part = '${part}'`
+    pool.query(CREATE_PO_QUERY, (err, results) => {
+        if (err) {
+            return res.send(err);
+        }
+        else {
+            return res.send('successfully create PO');
+        }
+    });
+});
+
 
 app.get('/AddPayRoll', (req, res) => {
     const { name, date, salary } = req.query;
@@ -158,8 +368,8 @@ app.get('/AddPayRoll', (req, res) => {
 });
 
 app.get('/AddHistory', (req, res) => {
-    const {date, comp_name,quantity,ppu,total } = req.query;
-    console.log(date, comp_name,quantity,ppu,total);
+    const { date, comp_name, quantity, ppu, total } = req.query;
+    console.log(date, comp_name, quantity, ppu, total);
     const ADD_HISTORY_QUERY = `INSERT INTO InvoiceHistory (date,comp_name,quantity,ppu,total) VALUES('${date}','${comp_name}',${quantity},${ppu},${total})`;
     pool.query(ADD_HISTORY_QUERY, (err, results) => {
         if (err) {
@@ -167,6 +377,20 @@ app.get('/AddHistory', (req, res) => {
         }
         else {
             return res.send('successfully add history');
+        }
+    });
+});
+
+app.get('/AddPOHistory', (req, res) => {
+    const { date, comp_name, part, quantity, ppu, total } = req.query;
+    console.log(date, comp_name,part, quantity, ppu, total);
+    const ADD_POHISTORY_QUERY = `INSERT INTO POHistory (date,comp_name,part,quantity,ppu,total) VALUES('${date}','${comp_name}','${part}',${quantity},${ppu},${total})`;
+    pool.query(ADD_POHISTORY_QUERY, (err, results) => {
+        if (err) {
+            return res.send(err);
+        }
+        else {
+            return res.send('successfully add POhistory');
         }
     });
 });
@@ -198,6 +422,8 @@ app.get('/AddVendor', (req, res) => {
         }
     });
 });
+
+
 
 app.listen(4000, () => {
     console.log('Server listening on port 4000')

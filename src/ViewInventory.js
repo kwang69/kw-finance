@@ -91,6 +91,13 @@ class ViewInventory extends Component {
       amount = data_1[0].quantity;
       price = data_1[0].ppu
       data_1[0].value =data_1[0].quantity * data_1[0].ppu;
+
+      for(j = 0; j < data.length;j++){
+        data[j].value = data[j].quantity * data[j].ppu;
+        if(data[j].quantity < 1000){
+          data[j].reorder = 'YES'
+        }
+      }
     }
 
     return (

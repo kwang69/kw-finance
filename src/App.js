@@ -11,6 +11,10 @@ import ViewPaymentRoll from './ViewPaymentRoll'
 import ViewInventory from './ViewInventory'
 import CreateInvoice from './CreateInvoice'
 import ViewInvoiceHistory from './ViewInvoiceHistory'
+import ViewPOHistory from './ViewPOHistory'
+import CreatePO from './CreatePO'
+import ViewBalanceSheet from './ViewBalanceSheet'
+import ViewIncomeStatement from './ViewIncomeStatement'
 import Home from './Home'
 import { BrowserRouter, Route, Link} from 'react-router-dom'
 import Button from 'antd/es/button';
@@ -36,7 +40,11 @@ class App extends Component {
           <Route path='/ViewPaymentRoll' component={ViewPaymentRoll}/>
           <Route path='/ViewInventory' component={ViewInventory}/>
           <Route path='/CreateInvoice' component={CreateInvoice}/>
+          <Route path='/CreatePO' component={CreatePO}/>
           <Route path='/ViewInvoiceHistory' component={ViewInvoiceHistory}/>
+          <Route path='/ViewPOHistory' component={ViewPOHistory}/>
+          <Route path='/ViewBalanceSheet' component={ViewBalanceSheet}/>
+          <Route path='/ViewIncomeStatement' component={ViewIncomeStatement}/>
           
         </div>
       </BrowserRouter>

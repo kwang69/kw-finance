@@ -4,6 +4,8 @@ import './Home.css';
 import { BrowserRouter, Route, Link } from 'react-router-dom'
 
 class Home extends Component {
+
+
   render() {
     return (
       <div className='Menu'>
@@ -36,8 +38,8 @@ class Home extends Component {
           <Link to="/CreateInvoice">
             <Button type="primary">Create Invoice</Button>
           </Link>
-          <Link to="/AddVendor">
-            <Button type="primary">Add Vendors</Button>
+          <Link to="/CreatePO">
+            <Button type="primary">Create PO</Button>
           </Link>
         </div>
         <div className='Menu_1'>
@@ -47,9 +49,20 @@ class Home extends Component {
           <Link to="/ViewInvoiceHistory">
             <Button type="primary">View Invoice History</Button>
           </Link>
+          <Link to="/ViewPOHistory">
+            <Button type="primary">View PO History</Button>
+          </Link>
           
+        </div>
+        <div className='Menu_1'>
           <Link to="/ViewInventory">
             <Button type="primary">View Inventory</Button>
+          </Link>
+          <Link to="/ViewBalanceSheet">
+            <Button type="primary">View	Balance	Sheet</Button>
+          </Link>
+          <Link to="/ViewIncomeStatement">
+            <Button type="primary">View	Income Statement</Button>
           </Link>
         </div>
       </div>
