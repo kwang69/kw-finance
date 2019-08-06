@@ -192,7 +192,7 @@ app.get('/CreateInvoice', (req, res) => {
 app.get('/updateBalance', (req, res) => {
     const { salary } = req.query;
     console.log(salary);
-    UPDATE_BS_QUERY = `UPDATE BalanceSheet SET value = value - ${salary} WHERE name = 'Cash' OR name ='NET WORTH'`
+    UPDATE_BS_QUERY = `UPDATE BalanceSheet SET value = value - ${salary} WHERE name = 'Cash'`
     pool.query(UPDATE_BS_QUERY, (err, results) => {
         if (err) {
             return res.send(err);
@@ -247,7 +247,7 @@ app.get('/updateIS_2', (req, res) => {
 app.get('/updateBS_1', (req, res) => {
     const { ac } = req.query;
     console.log(ac);
-    UPDATE_BS_QUERY = `UPDATE BalanceSheet SET value = value + ${ac} WHERE name = 'Accounts Receivable' OR name ='NET WORTH'`
+    UPDATE_BS_QUERY = `UPDATE BalanceSheet SET value = value + ${ac} WHERE name = 'Accounts Receivable'`
     pool.query(UPDATE_BS_QUERY, (err, results) => {
         if (err) {
             return res.send(err);
